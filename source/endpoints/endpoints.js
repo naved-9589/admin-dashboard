@@ -7,6 +7,7 @@ const calendermodel = require("../database/calenderschema");
 const ticketmodel = require("../database/ticketschema");
 const productmodel = require("../database/productschema");
 const linemodel = require("../database/linechartschema");
+const userloginmodel = require("../database/adminuserschema")
 const path = require("path");
 const fileUpload = require("express-fileupload");
 
@@ -410,6 +411,41 @@ route.get("/linefetch", async(req, res)=>{
         } catch (error) {
           console.log(error);
         }
+})
+
+
+route.post("/register", async(req, res)=>{
+     try {
+      
+      const inserting = new userloginmodel({
+        username: "naved9589",
+        password: "naved9589157798"
+      })
+
+      const data = await inserting.save();
+      console.log(data)
+     } catch (error) {
+      console.log(error);
+     }
+})
+
+route.post("/login", async(req, res)=>{
+     try {
+      
+      const finding = await userloginmodel.findOne({username: req.body.username});
+      if(!finding){
+        return res.json("please provide valid username");
+       
+      }
+      if(finding.password !== req.body.password){
+        return res.json("please provide correct information");    
+      }
+      
+      res.json({username: finding.username});
+
+     } catch (error) {
+      console.log(error);
+     }
 })
 
 module.exports = route;
