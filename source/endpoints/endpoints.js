@@ -62,6 +62,18 @@ route.get("/searchnote", async(req, res)=>{
 
 })
 
+route.delete("/deletenote", async(req, res)=>{
+     try {
+      
+      const data = await notemodel.findOneAndDelete({_id: req.body.id})
+      res.json("success")
+ console.log(data);
+
+     } catch (error) {
+      console.log(error);
+     }
+})
+
 
 route.post("/addcontact", async(req, res)=>{
         try {
@@ -389,8 +401,8 @@ route.post("/linedata", async(req, res) =>{
      try {
       
       const inserting = new linemodel({
-        month: "june",
-        salesquantity: 9
+        month: "dece",
+        salesquantity: 11
       })
 
       const data = await inserting.save();

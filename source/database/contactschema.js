@@ -29,7 +29,7 @@ const contactschema = new mongoose.Schema({
     },
     rate:{
         type: String,
-        default: true,
+        default: false,
     },
   
 })
