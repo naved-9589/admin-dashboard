@@ -3,8 +3,9 @@ const app = express();
 const cors = require('cors');
 const path = require("path")
 
-app.use(express.static(path.join(__dirname, 'uploads')));
+
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'uploads')));
 require("./database/conn");
 
 app.use(express.json());
